@@ -1,5 +1,4 @@
 # projet
-quelques projets professionnels dans mon parcours professionnel.
 # 🚀 Projet Docker Swarm avec HAProxy, Prometheus et Grafana
 
 ## 📌 Description

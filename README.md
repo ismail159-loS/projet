@@ -36,3 +36,6 @@ graph TD
     Prometheus --> Grafana
     cAdvisor --> Prometheus
     NodeExporter --> Prometheus
+
+<img width="1544" height="710" alt="Capture d'écran 2025-07-04 174437" src="https://github.com/user-attachments/assets/7ab2afcf-5c87-4d0b-8b86-1037dc5845bf" />
+<img width="1538" height="828" alt="Capture d'écran 2025-07-04 174500" src="https://github.com/user-attachments/assets/f5b22127-a6e7-4d42-b4e8-c7100cb350df" />

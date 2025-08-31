@@ -36,8 +36,6 @@ Si tu n’as pas déjà des certificats Let’s Encrypt, tu peux en créer des *
 * HAProxy Stats** : `http://<IP_manager>:8404`
 * cAdvisor** : `http://<IP_node>:8080`
 
-## Mise à jour du stack
-
 ## Si vous modifiez un fichier (`prometheus.yml`, `haproxy.cfg`, etc.) :
       docker stack deploy -c docker-compose.yml mon-projet
 
@@ -46,8 +44,6 @@ Si tu n’as pas déjà des certificats Let’s Encrypt, tu peux en créer des *
 ## Simuler une panne en stoppant un conteneur web :
         docker service scale mon-projet_web=2
  
-➝ Vérifier que le site reste accessible (HAProxy redirige vers les autres replicas).
-
 ## Ajouter un nouveau *worker* :
         docker swarm join --token <token> <manager_ip>:2377
   

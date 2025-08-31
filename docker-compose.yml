@@ -1,0 +1,83 @@
+services:
+  haproxy:
+    image: haproxy:latest
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8404:8404"
+    volumes:
+      - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+      - ./ssl:/usr/local/etc/haproxy/ssl:ro
+    networks:
+      - lb_net
+    deploy:
+      placement:
+        constraints: [node.role == manager]
+
+  web:
+    image: nginx:alpine
+    deploy:
+      replicas: 3
+    networks:
+      - lb_net
+
+  haproxy-exporter:
+    image: prom/haproxy-exporter
+    command:
+      - "--haproxy.scrape-uri=http://haproxy:8404/stats;csv"
+    ports:
+      - "9101:9101"
+    networks:
+      - lb_net
+    depends_on:
+      - haproxy
+
+  prometheus:
+    image: prom/prometheus
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    ports:
+      - "9090:9090"
+    networks:
+      - lb_net
+    deploy:
+      placement:
+        constraints: [node.role == manager]
+
+  grafana:
+    image: grafana/grafana
+    ports:
+      - "3000:3000"
+    networks:
+      - lb_net     
+    volumes:
+      - ./grafana/grafana.ini:/etc/grafana/grafana.ini
+      - ./grafana/ssl:/etc/grafana/ssl:ro
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    depends_on:
+      - prometheus
+    deploy:
+      placement:
+        constraints: [node.role == manager]
+
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor:latest
+    ports:
+      - "8080:8080"
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+    networks:
+      - lb_net
+    deploy:
+      mode: global
+
+networks:
+  lb_net:
+    driver: overlay
+    attachable: true
+

@@ -1,0 +1,81 @@
+{
+  "dashboard": {
+    "id": null,
+    "title": "HAProxy Metrics",
+    "timezone": "browser",
+    "schemaVersion": 30,
+    "version": 1,
+    "refresh": "5s",
+    "panels": [
+      {
+        "type": "graph",
+        "title": "Total HTTP Requests",
+        "datasource": "Prometheus",
+        "targets": [
+          {
+            "expr": "haproxy_frontend_http_requests_total",
+            "legendFormat": "Total Requests",
+            "refId": "A"
+          }
+        ],
+        "xaxis": {
+          "mode": "time"
+        },
+        "yaxes": [
+          {
+            "format": "short"
+          },
+          {
+            "format": "short"
+          }
+        ],
+        "gridPos": {
+          "h": 8,
+          "w": 24,
+          "x": 0,
+          "y": 0
+        }
+      },
+      {
+        "type": "graph",
+        "title": "Current Sessions",
+        "datasource": "Prometheus",
+        "targets": [
+          {
+            "expr": "haproxy_frontend_current_sessions",
+            "legendFormat": "Sessions",
+            "refId": "B"
+          }
+        ],
+        "xaxis": {
+          "mode": "time"
+        },
+        "yaxes": [
+          {
+            "format": "short"
+          },
+          {
+            "format": "short"
+          }
+        ],
+        "gridPos": {
+          "h": 8,
+          "w": 24,
+          "x": 0,
+          "y": 8
+        }
+      }
+    ],
+    "templating": {
+      "list": []
+    },
+    "annotations": {
+      "list": []
+    },
+    "time": {
+      "from": "now-1h",
+      "to": "now"
+    }
+  },
+  "overwrite": true
+}

@@ -3,11 +3,11 @@
 * Docker Swarm : activé (`docker swarm init`)
 * Accès root ou utilisateur dans le groupe `docker`
 
-###Cloner le projet
+## Cloner le projet
       git clone https://github.com/[ton-user]/[ton-projet].git
       cd [ton-projet]
 
-###Créer le réseau overlay
+## Créer le réseau overlay
       docker network create --driver overlay --attachable mon-projet-lb-net
 
 
@@ -20,10 +20,10 @@ Si tu n’as pas déjà des certificats Let’s Encrypt, tu peux en créer des *
       -keyout ssl/privkey.pem -out ssl/fullchain.pem
     cat ssl/privkey.pem ssl/fullchain.pem > ssl/haproxy.pem
 
-##Déployer le stack
+## Déployer le stack
     docker stack deploy -c docker-compose.yml mon-projet
 
-##Vérifier l’état des services
+## Vérifier l’état des services
     docker service ls
 
 
@@ -36,19 +36,19 @@ Si tu n’as pas déjà des certificats Let’s Encrypt, tu peux en créer des *
 * HAProxy Stats** : `http://<IP_manager>:8404`
 * cAdvisor** : `http://<IP_node>:8080`
 
-## 🔄 Mise à jour du stack
+## Mise à jour du stack
 
-Si vous modifiez un fichier (`prometheus.yml`, `haproxy.cfg`, etc.) :
+## Si vous modifiez un fichier (`prometheus.yml`, `haproxy.cfg`, etc.) :
       docker stack deploy -c docker-compose.yml mon-projet
 
 ##  Tests rapides
 
-* Simuler une panne en stoppant un conteneur web :
+## Simuler une panne en stoppant un conteneur web :
         docker service scale mon-projet_web=2
  
 ➝ Vérifier que le site reste accessible (HAProxy redirige vers les autres replicas).
 
-##Ajouter un nouveau *worker* :
+## Ajouter un nouveau *worker* :
         docker swarm join --token <token> <manager_ip>:2377
   
 

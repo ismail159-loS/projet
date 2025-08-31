@@ -54,6 +54,5 @@ Si tu n’as pas déjà des certificats Let’s Encrypt, tu peux en créer des *
 
  
 
-👉 Avec ça, n’importe qui peut installer ton projet rapidement 🚀
 
-Veux-tu que je prépare aussi une **checklist rapide (Quick Start)** dans le `README.md` pour les utilisateurs pressés (genre en 3–4 commandes) ?
+
